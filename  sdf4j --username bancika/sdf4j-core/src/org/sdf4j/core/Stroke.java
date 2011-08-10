@@ -1,4 +1,4 @@
-package org.diylc.sdf4j.core;
+package org.sdf4j.core;
 
 /**
  * Represents a decorated shape outline.
