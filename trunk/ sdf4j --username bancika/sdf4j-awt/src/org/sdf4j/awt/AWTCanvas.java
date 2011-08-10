@@ -8,7 +8,7 @@ import org.sdf4j.core.AffineTransform;
 import org.sdf4j.core.Color;
 import org.sdf4j.core.Font;
 import org.sdf4j.core.ICanvas;
-import org.sdf4j.core.IImage;
+import org.sdf4j.core.Image;
 import org.sdf4j.core.Stroke;
 
 /**
@@ -107,8 +107,8 @@ public class AWTCanvas implements ICanvas {
 	}
 
 	@Override
-	public void drawImage(IImage img, int x, int y) {
-		ImageIcon icon = new ImageIcon(img.getPixels());
+	public void drawImage(Image img, int x, int y) {
+		ImageIcon icon = new ImageIcon(img.getData());
 		g2d.drawImage(icon.getImage(), x, y, null);
 	}
 
