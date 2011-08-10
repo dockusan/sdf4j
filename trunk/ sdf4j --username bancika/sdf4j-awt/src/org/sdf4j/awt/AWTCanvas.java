@@ -1,6 +1,5 @@
 package org.sdf4j.awt;
 
-import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
 import org.sdf4j.core.Color;
@@ -25,61 +24,76 @@ public class AWTCanvas implements ICanvas {
 
 	@Override
 	public Color getColor() {
-		return convertColor(g2d.getColor());
+		return ConversionUtil.convertColor(g2d.getColor());
 	}
 
 	@Override
 	public void setColor(Color c) {
-		g2d.setColor(convertColor(c));
+		g2d.setColor(ConversionUtil.convertColor(c));
 	}
 
 	@Override
 	public Stroke getStroke() {
-		return convertStroke(g2d.getStroke());
+		return ConversionUtil.convertStroke(g2d.getStroke());
 	}
 
 	@Override
 	public void setStroke(Stroke s) {
-		g2d.setStroke(convertStroke(s));
+		g2d.setStroke(ConversionUtil.convertStroke(s));
 	}
-	
+
 	@Override
 	public Font getFont() {
-		return convertFont(g2d.getFont());
+		return ConversionUtil.convertFont(g2d.getFont());
+	}
+
+	@Override
+	public void setFont(Font f) {
+		g2d.setFont(ConversionUtil.convertFont(f));
+	}
+
+	@Override
+	public void drawLine(int x1, int y1, int x2, int y2) {
+		g2d.drawLine(x1, y1, x2, y2);
+	}
+
+	@Override
+	public void drawRect(int x, int y, int width, int height) {
+		g2d.drawRect(x, y, width, height);
+	}
+
+	@Override
+	public void fillRect(int x, int y, int width, int height) {
+		g2d.fillRect(x, y, width, height);
+	}
+
+	@Override
+	public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+		g2d.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+	}
+
+	@Override
+	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+		g2d.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
 	
 	@Override
-	public void setFont(Font f) {
-		g2d.setFont(convertFont(f));
-	}
-
-	private static java.awt.Color convertColor(org.sdf4j.core.Color c) {
-		return new java.awt.Color(c.getRGB());
-	}
-
-	private static org.sdf4j.core.Color convertColor(java.awt.Color c) {
-		return new org.sdf4j.core.Color(c.getRGB());
-	}
-
-	private static java.awt.Stroke convertStroke(org.sdf4j.core.Stroke s) {
-		return new java.awt.BasicStroke(s.getLineWidth(), s.getEndCap(), s.getLineJoin(), s
-				.getMiterLimit(), s.getDashArray(), s.getDashPhase());
-	}
-
-	private static org.sdf4j.core.Stroke convertStroke(java.awt.Stroke s) {
-		if (s instanceof BasicStroke) {
-			BasicStroke bs = (BasicStroke) s;
-			return new org.sdf4j.core.Stroke(bs.getLineWidth(), bs.getEndCap(),
-					bs.getLineJoin(), bs.getMiterLimit(), bs.getDashArray(), bs.getDashPhase());
-		}
-		throw new IllegalArgumentException("Only BasicStroke instance are recognized.");
+	public void drawOval(int x, int y, int width, int height) {
+		g2d.drawOval(x, y, width, height);
 	}
 	
-	private static java.awt.Font convertFont(org.sdf4j.core.Font f) {
-		return new java.awt.Font(f.getName(), f.getSize(), f.getStyle());
+	@Override
+	public void fillOval(int x, int y, int width, int height) {
+		g2d.fillOval(x, y, width, height);
 	}
-
-	private static org.sdf4j.core.Font convertFont(java.awt.Font f) {
-		return new org.sdf4j.core.Font(f.getName(), f.getSize(), f.getStyle());
+	
+	@Override
+	public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+		g2d.drawArc(x, y, width, height, startAngle, arcAngle);
+	}
+	
+	@Override
+	public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+		g2d.fillArc(x, y, width, height, startAngle, arcAngle);
 	}
 }
