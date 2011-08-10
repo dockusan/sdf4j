@@ -4,13 +4,12 @@ import java.awt.Graphics2D;
 
 import javax.swing.ImageIcon;
 
+import org.sdf4j.core.AffineTransform;
 import org.sdf4j.core.Color;
 import org.sdf4j.core.Font;
 import org.sdf4j.core.ICanvas;
 import org.sdf4j.core.IImage;
 import org.sdf4j.core.Stroke;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * {@link ICanvas} implementation for AWT {@link Graphics2D}. Wraps around the
@@ -81,27 +80,27 @@ public class AWTCanvas implements ICanvas {
 	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
 		g2d.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
-	
+
 	@Override
 	public void drawOval(int x, int y, int width, int height) {
 		g2d.drawOval(x, y, width, height);
 	}
-	
+
 	@Override
 	public void fillOval(int x, int y, int width, int height) {
 		g2d.fillOval(x, y, width, height);
 	}
-	
+
 	@Override
 	public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
 		g2d.drawArc(x, y, width, height, startAngle, arcAngle);
 	}
-	
+
 	@Override
 	public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
 		g2d.fillArc(x, y, width, height, startAngle, arcAngle);
 	}
-	
+
 	@Override
 	public void drawString(String str, int x, int y) {
 		g2d.drawString(str, x, y);
@@ -111,5 +110,40 @@ public class AWTCanvas implements ICanvas {
 	public void drawImage(IImage img, int x, int y) {
 		ImageIcon icon = new ImageIcon(img.getPixels());
 		g2d.drawImage(icon.getImage(), x, y, null);
+	}
+
+	@Override
+	public AffineTransform getTransform() {
+		return ConversionUtil.convertAffineTransform(g2d.getTransform());
+	}
+
+	@Override
+	public void setTransform(AffineTransform tx) {
+		g2d.setTransform(ConversionUtil.convertAffineTransform(tx));
+	}
+
+	@Override
+	public void transform(AffineTransform tx) {
+		g2d.transform(ConversionUtil.convertAffineTransform(tx));
+	}
+
+	@Override
+	public void rotate(double theta) {
+		g2d.rotate(theta);
+	}
+
+	@Override
+	public void rotate(double theta, double x, double y) {
+		g2d.rotate(theta, x, y);
+	}
+
+	@Override
+	public void scale(double sx, double sy) {
+		g2d.scale(sx, sy);
+	}
+
+	@Override
+	public void translate(int x, int y) {
+		g2d.translate(x, y);
 	}
 }
