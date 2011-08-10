@@ -1,4 +1,4 @@
-package org.diylc.sdf4j.awt;
+package org.sdf4j.awt;
 
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
