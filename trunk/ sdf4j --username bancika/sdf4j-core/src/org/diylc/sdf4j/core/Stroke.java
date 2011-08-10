@@ -55,12 +55,12 @@ public class Stroke {
 	 * Constructs a new <code>Stroke</code> with the specified attributes.
 	 * 
 	 * @param width
-	 *            the width of this <code>BasicStroke</code>. The width must be
+	 *            the width of this <code>Stroke</code>. The width must be
 	 *            greater than or equal to 0.0f. If width is set to 0.0f, the
 	 *            stroke is rendered as the thinnest possible line for the
 	 *            target device and the antialias hint setting.
 	 * @param cap
-	 *            the decoration of the ends of a <code>BasicStroke</code>
+	 *            the decoration of the ends of a <code>Stroke</code>
 	 * @param join
 	 *            the decoration applied where path segments meet
 	 * @param miterlimit
@@ -131,13 +131,13 @@ public class Stroke {
 	}
 
 	/**
-	 * Constructs a solid <code>BasicStroke</code> with the specified
+	 * Constructs a solid <code>Stroke</code> with the specified
 	 * attributes.
 	 * 
 	 * @param width
-	 *            the width of the <code>BasicStroke</code>
+	 *            the width of the <code>Stroke</code>
 	 * @param cap
-	 *            the decoration of the ends of a <code>BasicStroke</code>
+	 *            the decoration of the ends of a <code>Stroke</code>
 	 * @param join
 	 *            the decoration applied where path segments meet
 	 * @param miterlimit
@@ -159,15 +159,15 @@ public class Stroke {
 	}
 
 	/**
-	 * Constructs a solid <code>BasicStroke</code> with the specified
+	 * Constructs a solid <code>Stroke</code> with the specified
 	 * attributes. The <code>miterlimit</code> parameter is unnecessary in cases
 	 * where the default is allowable or the line joins are not specified as
 	 * JOIN_MITER.
 	 * 
 	 * @param width
-	 *            the width of the <code>BasicStroke</code>
+	 *            the width of the <code>Stroke</code>
 	 * @param cap
-	 *            the decoration of the ends of a <code>BasicStroke</code>
+	 *            the decoration of the ends of a <code>Stroke</code>
 	 * @param join
 	 *            the decoration applied where path segments meet
 	 * @throws IllegalArgumentException
@@ -184,11 +184,11 @@ public class Stroke {
 	}
 
 	/**
-	 * Constructs a solid <code>BasicStroke</code> with the specified line width
+	 * Constructs a solid <code>Stroke</code> with the specified line width
 	 * and with default values for the cap and join styles.
 	 * 
 	 * @param width
-	 *            the width of the <code>BasicStroke</code>
+	 *            the width of the <code>Stroke</code>
 	 * @throws IllegalArgumentException
 	 *             if <code>width</code> is negative
 	 */

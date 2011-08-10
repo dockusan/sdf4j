@@ -41,6 +41,10 @@ public class Color {
 		value = ((a & 0xFF) << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | ((b & 0xFF) << 0);
 	}
 
+	public Color(int rgb) {
+		value = 0xff000000 | rgb;
+	}
+
 	public int getRed() {
 		return (getRGB() >> 16) & 0xFF;
 	}
