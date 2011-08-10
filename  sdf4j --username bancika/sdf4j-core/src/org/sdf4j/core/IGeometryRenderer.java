@@ -227,4 +227,21 @@ public interface IGeometryRenderer {
 	 * @see #drawArc
 	 */
 	void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle);
+
+	/**
+	 * Draws the text given by the specified string, using this graphics
+	 * context's current font and color. The baseline of the leftmost character
+	 * is at position (<i>x</i>,&nbsp;<i>y</i>) in this graphics context's
+	 * coordinate system.
+	 * 
+	 * @param str
+	 *            the string to be drawn.
+	 * @param x
+	 *            the <i>x</i> coordinate.
+	 * @param y
+	 *            the <i>y</i> coordinate.
+	 * @throws NullPointerException
+	 *             if <code>str</code> is <code>null</code>.
+	 */
+	void drawString(String str, int x, int y);
 }
