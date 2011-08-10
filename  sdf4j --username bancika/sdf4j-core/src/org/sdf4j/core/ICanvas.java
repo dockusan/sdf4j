@@ -49,4 +49,27 @@ public interface ICanvas {
 	 * @see #getStroke
 	 */
 	public void setStroke(Stroke s);
+
+	/**
+	 * Gets the current font.
+	 * 
+	 * @return this graphics context's current font.
+	 * @see java.awt.Font
+	 * @see java.awt.Graphics#setFont(Font)
+	 */
+	public Font getFont();
+
+	/**
+	 * Sets this graphics context's font to the specified font. All subsequent
+	 * text operations using this graphics context use this font. A null
+	 * argument is silently ignored.
+	 * 
+	 * @param f
+	 *            the font.
+	 * @see java.awt.Graphics#getFont
+	 * @see java.awt.Graphics#drawString(java.lang.String, int, int)
+	 * @see java.awt.Graphics#drawBytes(byte[], int, int, int, int)
+	 * @see java.awt.Graphics#drawChars(char[], int, int, int, int)
+	 */
+	public void setFont(Font f);
 }

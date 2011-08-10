@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
 import org.sdf4j.core.Color;
+import org.sdf4j.core.Font;
 import org.sdf4j.core.ICanvas;
 import org.sdf4j.core.Stroke;
 
@@ -41,6 +42,16 @@ public class AWTCanvas implements ICanvas {
 	public void setStroke(Stroke s) {
 		g2d.setStroke(convertStroke(s));
 	}
+	
+	@Override
+	public Font getFont() {
+		return convertFont(g2d.getFont());
+	}
+	
+	@Override
+	public void setFont(Font f) {
+		g2d.setFont(convertFont(f));
+	}
 
 	private static java.awt.Color convertColor(org.sdf4j.core.Color c) {
 		return new java.awt.Color(c.getRGB());
@@ -62,5 +73,13 @@ public class AWTCanvas implements ICanvas {
 					bs.getLineJoin(), bs.getMiterLimit(), bs.getDashArray(), bs.getDashPhase());
 		}
 		throw new IllegalArgumentException("Only BasicStroke instance are recognized.");
+	}
+	
+	private static java.awt.Font convertFont(org.sdf4j.core.Font f) {
+		return new java.awt.Font(f.getName(), f.getSize(), f.getStyle());
+	}
+
+	private static org.sdf4j.core.Font convertFont(java.awt.Font f) {
+		return new org.sdf4j.core.Font(f.getName(), f.getSize(), f.getStyle());
 	}
 }
