@@ -1,5 +1,6 @@
 package org.diylc.sdf4j.awt;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
 import org.diylc.sdf4j.core.Color;
@@ -23,32 +24,43 @@ public class AWTCanvas implements ICanvas {
 
 	@Override
 	public Color getColor() {
-		return awt2sdfColor(g2d.getColor());
+		return convertColor(g2d.getColor());
 	}
-	
 
 	@Override
 	public void setColor(Color c) {
-		g2d.setColor(sdf2awtColor(c));
+		g2d.setColor(convertColor(c));
 	}
 
 	@Override
 	public Stroke getStroke() {
-		// TODO Auto-generated method stub
-		return null;
+		return convertStroke(g2d.getStroke());
 	}
 
 	@Override
 	public void setStroke(Stroke s) {
-		// TODO Auto-generated method stub
-		
+		g2d.setStroke(convertStroke(s));
 	}
 
-	private static java.awt.Color sdf2awtColor(org.diylc.sdf4j.core.Color c) {
+	private static java.awt.Color convertColor(org.diylc.sdf4j.core.Color c) {
 		return new java.awt.Color(c.getRGB());
 	}
-	
-	private static org.diylc.sdf4j.core.Color awt2sdfColor(java.awt.Color c) {
+
+	private static org.diylc.sdf4j.core.Color convertColor(java.awt.Color c) {
 		return new org.diylc.sdf4j.core.Color(c.getRGB());
+	}
+
+	private static java.awt.Stroke convertStroke(org.diylc.sdf4j.core.Stroke s) {
+		return new java.awt.BasicStroke(s.getLineWidth(), s.getEndCap(), s.getLineJoin(), s
+				.getMiterLimit(), s.getDashArray(), s.getDashPhase());
+	}
+
+	private static org.diylc.sdf4j.core.Stroke convertStroke(java.awt.Stroke s) {
+		if (s instanceof BasicStroke) {
+			BasicStroke bs = (BasicStroke) s;
+			return new org.diylc.sdf4j.core.Stroke(bs.getLineWidth(), bs.getEndCap(),
+					bs.getLineJoin(), bs.getMiterLimit(), bs.getDashArray(), bs.getDashPhase());
+		}
+		throw new IllegalArgumentException("Only BasicStroke instance are recognized.");
 	}
 }
