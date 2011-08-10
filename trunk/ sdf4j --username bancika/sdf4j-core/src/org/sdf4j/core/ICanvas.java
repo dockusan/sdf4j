@@ -1,4 +1,4 @@
-package org.diylc.sdf4j.core;
+package org.sdf4j.core;
 
 /**
  * Interface that describes a canvas, regardless of its technology. Has methods
@@ -15,7 +15,7 @@ public interface ICanvas {
 	 * 
 	 * @param c
 	 *            the new rendering color.
-	 * @see org.diylc.sdf4j.core.Color
+	 * @see org.sdf4j.core.Color
 	 * @see #getColor
 	 */
 	public void setColor(Color c);
@@ -24,7 +24,7 @@ public interface ICanvas {
 	 * Gets this graphics context's current color.
 	 * 
 	 * @return this graphics context's current color.
-	 * @see org.diylc.sdf4j.core.Color
+	 * @see org.sdf4j.core.Color
 	 * @see #setColor(Color)
 	 */
 	public Color getColor();
@@ -45,7 +45,7 @@ public interface ICanvas {
 	 * @param s
 	 *            the <code>Stroke</code> object to be used to stroke a
 	 *            <code>Shape</code> during the rendering process
-	 * @see org.diylc.sdf4j.core.Stroke
+	 * @see org.sdf4j.core.Stroke
 	 * @see #getStroke
 	 */
 	public void setStroke(Stroke s);
