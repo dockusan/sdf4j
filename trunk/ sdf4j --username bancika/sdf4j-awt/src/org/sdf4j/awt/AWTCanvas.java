@@ -2,10 +2,15 @@ package org.sdf4j.awt;
 
 import java.awt.Graphics2D;
 
+import javax.swing.ImageIcon;
+
 import org.sdf4j.core.Color;
 import org.sdf4j.core.Font;
 import org.sdf4j.core.ICanvas;
+import org.sdf4j.core.IImage;
 import org.sdf4j.core.Stroke;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * {@link ICanvas} implementation for AWT {@link Graphics2D}. Wraps around the
@@ -95,5 +100,16 @@ public class AWTCanvas implements ICanvas {
 	@Override
 	public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
 		g2d.fillArc(x, y, width, height, startAngle, arcAngle);
+	}
+	
+	@Override
+	public void drawString(String str, int x, int y) {
+		g2d.drawString(str, x, y);
+	}
+
+	@Override
+	public void drawImage(IImage img, int x, int y) {
+		ImageIcon icon = new ImageIcon(img.getPixels());
+		g2d.drawImage(icon.getImage(), x, y, null);
 	}
 }
