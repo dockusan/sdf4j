@@ -26,7 +26,7 @@ public class Test {
 		canvas.setColor(Color.blue);
 		canvas.drawRect(65, 65, 30, 30);
 		canvas.restoreTransform();
-		canvas.setColor(Color.black);
+		canvas.setColor(Color.red);
 		canvas.setFont(new Font("Tahoma", Font.BOLD, 14));
 		canvas.drawString("test", 50, 20);
 		canvas.saveTransform();
