@@ -2,8 +2,14 @@ package org.sdf4j.core;
 
 public interface ITransformable {
 
+	/**
+	 * Saves the state of the transformation.
+	 */
 	void saveTransform();
-	
+
+	/**
+	 * Restores the previously saved transformation state.
+	 */
 	void restoreTransform();
 
 	/**
