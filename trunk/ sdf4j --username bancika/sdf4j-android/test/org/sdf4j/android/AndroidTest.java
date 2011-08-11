@@ -1,10 +1,10 @@
-package org.sdf4j;
+package org.sdf4j.android;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.sdf4j.android.AndroidCanvas;
+import org.sdf4j.android.R;
 import org.sdf4j.core.Image;
 import org.slf4j.core.Test;
 
