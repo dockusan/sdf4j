@@ -14,7 +14,7 @@ import org.slf4j.core.Test;
  * 
  * @author Branislav Stojkovic
  */
-public class TestAWT {
+public class AWTTest {
 
 	/**
 	 * @param args
@@ -27,9 +27,9 @@ public class TestAWT {
 			public void paint(Graphics g) {
 				Graphics2D g2d = (Graphics2D) g;
 				// Wrap the graphics with the AWTCanvas.
-				AWTCanvas canvas = new AWTCanvas(g2d);
+				AWTCanvas awtCanvas = new AWTCanvas(g2d);
 				// Call our generic drawing routine over the AWTCanvas.
-				Test.drawSample(canvas);
+				Test.drawSample(awtCanvas);
 			}
 		};
 		p.setPreferredSize(new Dimension(200, 200));
