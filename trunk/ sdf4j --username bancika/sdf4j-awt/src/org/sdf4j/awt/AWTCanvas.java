@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 
 import javax.swing.ImageIcon;
 
-import org.sdf4j.core.AffineTransform;
 import org.sdf4j.core.Color;
 import org.sdf4j.core.Font;
 import org.sdf4j.core.ICanvas;
@@ -20,6 +19,7 @@ import org.sdf4j.core.Stroke;
 public class AWTCanvas implements ICanvas {
 
 	private Graphics2D g2d;
+	private java.awt.geom.AffineTransform transform;
 
 	public AWTCanvas(Graphics2D g2d) {
 		super();
@@ -111,20 +111,15 @@ public class AWTCanvas implements ICanvas {
 		ImageIcon icon = new ImageIcon(img.getData());
 		g2d.drawImage(icon.getImage(), x, y, null);
 	}
-
+	
 	@Override
-	public AffineTransform getTransform() {
-		return ConversionUtil.convertAffineTransform(g2d.getTransform());
+	public void saveTransform() {
+		this.transform = g2d.getTransform();
 	}
-
+	
 	@Override
-	public void setTransform(AffineTransform tx) {
-		g2d.setTransform(ConversionUtil.convertAffineTransform(tx));
-	}
-
-	@Override
-	public void transform(AffineTransform tx) {
-		g2d.transform(ConversionUtil.convertAffineTransform(tx));
+	public void restoreTransform() {
+		g2d.setTransform(this.transform);
 	}
 
 	@Override
@@ -143,7 +138,7 @@ public class AWTCanvas implements ICanvas {
 	}
 
 	@Override
-	public void translate(int x, int y) {
-		g2d.translate(x, y);
+	public void translate(double dx, double dy) {
+		g2d.translate(dx, dy);
 	}
 }

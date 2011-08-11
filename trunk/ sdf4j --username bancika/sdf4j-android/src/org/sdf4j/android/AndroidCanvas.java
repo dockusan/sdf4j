@@ -6,6 +6,8 @@ import org.sdf4j.core.ICanvas;
 import org.sdf4j.core.Image;
 import org.sdf4j.core.Stroke;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -109,8 +111,8 @@ public class AndroidCanvas implements ICanvas {
 
 	@Override
 	public void drawImage(Image image, int x, int y) {
-		// TODO Auto-generated method stub
-
+		Bitmap bitmap = BitmapFactory.decodeByteArray(image.getData(), 0, image.getData().length);
+		canvas.drawBitmap(bitmap, x, y, paint);
 	}
 
 	@Override
