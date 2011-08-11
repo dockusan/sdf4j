@@ -1,6 +1,7 @@
 package org.sdf4j.awt;
 
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import javax.swing.ImageIcon;
 
@@ -54,6 +55,12 @@ public class AWTCanvas implements ICanvas {
 	@Override
 	public void setFont(Font f) {
 		g2d.setFont(ConversionUtil.convertFont(f));
+	}
+
+	@Override
+	public void setAntiAlias(boolean antiAlias) {
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				antiAlias ? RenderingHints.VALUE_ANTIALIAS_ON : RenderingHints.VALUE_ANTIALIAS_OFF);
 	}
 
 	@Override
@@ -111,14 +118,17 @@ public class AWTCanvas implements ICanvas {
 		ImageIcon icon = new ImageIcon(img.getData());
 		g2d.drawImage(icon.getImage(), x, y, null);
 	}
-	
+
 	@Override
 	public void saveTransform() {
 		this.transform = g2d.getTransform();
 	}
-	
+
 	@Override
 	public void restoreTransform() {
+		if (transform == null) {
+			throw new RuntimeException("There is no saved state to restore");
+		}
 		g2d.setTransform(this.transform);
 	}
 

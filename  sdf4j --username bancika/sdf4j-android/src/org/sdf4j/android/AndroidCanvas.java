@@ -9,16 +9,30 @@ import org.sdf4j.core.Stroke;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 
+/**
+ * {@link ICanvas} implementation for Android platform. Wraps around the
+ * provided {@link Canvas} instance and delegates all calls to it.
+ * 
+ * @author Branislav Stojkovic
+ */
 public class AndroidCanvas implements ICanvas {
 
 	private Canvas canvas;
 	private Paint paint = new Paint();
+
+	// Cached values, we can't get them back from the Paint object.
+	private float[] strokeIntervals;
+	private float strokePhase;
+
+	private String fontName;
 
 	public AndroidCanvas(Canvas canvas) {
 		super();
@@ -37,11 +51,13 @@ public class AndroidCanvas implements ICanvas {
 
 	@Override
 	public Font getFont() {
-		return null;
+		return new Font(fontName, paint.getTypeface().getStyle(), (int) paint.getTextSize());
 	}
 
 	@Override
 	public void setFont(Font f) {
+		paint.setTextSize(f.getSize());
+		paint.setTypeface(Typeface.create(f.getName(), f.getStyle()));
 	}
 
 	@Override
@@ -74,7 +90,12 @@ public class AndroidCanvas implements ICanvas {
 		default:
 			throw new RuntimeException("Unrecognized join value " + paint.getStrokeJoin());
 		}
-		return new Stroke(paint.getStrokeWidth(), cap, join, paint.getStrokeMiter());
+		if (strokeIntervals != null) {
+			return new Stroke(paint.getStrokeWidth(), cap, join, paint.getStrokeMiter(),
+					strokeIntervals, strokePhase);
+		} else {
+			return new Stroke(paint.getStrokeWidth(), cap, join, paint.getStrokeMiter());
+		}
 	}
 
 	@Override
@@ -111,6 +132,14 @@ public class AndroidCanvas implements ICanvas {
 		paint.setStrokeJoin(join);
 		paint.setStrokeMiter(s.getMiterLimit());
 		paint.setStrokeWidth(s.getLineWidth());
+		paint.setPathEffect(new DashPathEffect(s.getDashArray(), s.getDashPhase()));
+		this.strokeIntervals = s.getDashArray();
+		this.strokePhase = s.getDashPhase();
+	}
+	
+	@Override
+	public void setAntiAlias(boolean antiAlias) {
+		paint.setAntiAlias(antiAlias);
 	}
 
 	@Override

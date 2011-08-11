@@ -66,4 +66,6 @@ public interface IPaintingAttributeManager {
 	 * @see java.awt.Graphics#drawChars(char[], int, int, int, int)
 	 */
 	void setFont(Font f);
+	
+	void setAntiAlias(boolean antiAlias);
 }
