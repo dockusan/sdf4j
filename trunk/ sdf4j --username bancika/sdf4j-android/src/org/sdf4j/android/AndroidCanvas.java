@@ -31,7 +31,6 @@ public class AndroidCanvas implements ICanvas {
 	// Cached values, we can't get them back from the Paint object.
 	private float[] strokeIntervals;
 	private float strokePhase;
-
 	private String fontName;
 
 	public AndroidCanvas(Canvas canvas) {
