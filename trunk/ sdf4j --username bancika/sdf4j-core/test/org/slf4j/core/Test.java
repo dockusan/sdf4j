@@ -1,8 +1,13 @@
 package org.slf4j.core;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Arrays;
+
 import org.sdf4j.core.Color;
 import org.sdf4j.core.Font;
 import org.sdf4j.core.ICanvas;
+import org.sdf4j.core.Image;
 
 /**
  * Test class that draws test graphics on the provided canvas.
@@ -36,5 +41,29 @@ public class Test {
 		canvas.setColor(Color.black);
 		canvas.drawRoundRect(80, 10, 30, 30, 10, 10);
 		canvas.restoreTransform();
+		byte[] b = new byte[64000];
+		int size = 0;
+		try {
+			FileInputStream in = null;
+			try {
+				in = new FileInputStream("c:\\saved.png");
+				int c;
+
+				while ((c = in.read()) != -1) {
+					b[size++] = (byte) c;
+				}
+
+			} finally {
+				if (in != null) {
+					in.close();
+				}
+			}
+			byte[] newB = Arrays.copyOf(b, size);
+			Image i = new Image("test", newB);
+			canvas.drawImage(i, 10, 60);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
