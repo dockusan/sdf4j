@@ -2,72 +2,9 @@ package org.sdf4j.core;
 
 public interface ITransformable {
 
-	/**
-	 * Composes an <code>AffineTransform</code> object with the
-	 * <code>Transform</code> in this <code>Graphics2D</code> according to the
-	 * rule last-specified-first-applied. If the current <code>Transform</code>
-	 * is Cx, the result of composition with Tx is a new <code>Transform</code>
-	 * Cx'. Cx' becomes the current <code>Transform</code> for this
-	 * <code>Graphics2D</code>. Transforming a point p by the updated
-	 * <code>Transform</code> Cx' is equivalent to first transforming p by Tx
-	 * and then transforming the result by the original <code>Transform</code>
-	 * Cx. In other words, Cx'(p) = Cx(Tx(p)). A copy of the Tx is made, if
-	 * necessary, so further modifications to Tx do not affect rendering.
-	 * 
-	 * @param tx
-	 *            the <code>AffineTransform</code> object to be composed with
-	 *            the current <code>Transform</code>
-	 * @see #setTransform
-	 * @see AffineTransform
-	 */
-	void transform(AffineTransform tx);
-
-	/**
-	 * Returns a copy of the current <code>Transform</code> in the
-	 * <code>Graphics2D</code> context.
-	 * 
-	 * @return the current <code>AffineTransform</code> in the
-	 *         <code>Graphics2D</code> context.
-	 * @see #transform
-	 * @see #setTransform
-	 */
-	AffineTransform getTransform();
-
-	/**
-	 * Overwrites the Transform in the <code>Graphics2D</code> context. WARNING:
-	 * This method should <b>never</b> be used to apply a new coordinate
-	 * transform on top of an existing transform because the
-	 * <code>Graphics2D</code> might already have a transform that is needed for
-	 * other purposes, such as rendering Swing components or applying a scaling
-	 * transformation to adjust for the resolution of a printer.
-	 * <p>
-	 * To add a coordinate transform, use the <code>transform</code>,
-	 * <code>rotate</code>, <code>scale</code>, or <code>shear</code> methods.
-	 * The <code>setTransform</code> method is intended only for restoring the
-	 * original <code>Graphics2D</code> transform after rendering, as shown in
-	 * this example:
-	 * 
-	 * <pre>
-	 * &lt;blockquote&gt;
-	 * // Get the current transform
-	 * AffineTransform saveAT = g2.getTransform();
-	 * // Perform transformation
-	 * g2d.transform(...);
-	 * // Render
-	 * g2d.draw(...);
-	 * // Restore original transform
-	 * g2d.setTransform(saveAT);
-	 * &lt;/blockquote&gt;
-	 * </pre>
-	 * 
-	 * @param tx
-	 *            the <code>AffineTransform</code> that was retrieved from the
-	 *            <code>getTransform</code> method
-	 * @see #transform
-	 * @see #getTransform
-	 * @see AffineTransform
-	 */
-	void setTransform(AffineTransform tx);
+	void saveTransform();
+	
+	void restoreTransform();
 
 	/**
 	 * Translates the origin of the <code>Graphics2D</code> context to the point
@@ -83,7 +20,7 @@ public interface ITransformable {
 	 *            the specified y coordinate
 	 * @since JDK1.0
 	 */
-	public abstract void translate(int x, int y);
+	void translate(double x, double y);
 
 	/**
 	 * Concatenates the current <code>Graphics2D</code> <code>Transform</code>
@@ -104,7 +41,7 @@ public interface ITransformable {
 	 * @param theta
 	 *            the angle of rotation in radians
 	 */
-	public abstract void rotate(double theta);
+	void rotate(double theta);
 
 	/**
 	 * Concatenates the current <code>Graphics2D</code> <code>Transform</code>
@@ -130,7 +67,7 @@ public interface ITransformable {
 	 * @param y
 	 *            the y coordinate of the origin of the rotation
 	 */
-	public abstract void rotate(double theta, double x, double y);
+	void rotate(double theta, double x, double y);
 
 	/**
 	 * Concatenates the current <code>Graphics2D</code> <code>Transform</code>
@@ -154,6 +91,6 @@ public interface ITransformable {
 	 *            operations are multiplied relative to previous rendering
 	 *            operations.
 	 */
-	public abstract void scale(double sx, double sy);
+	void scale(double sx, double sy);
 
 }
