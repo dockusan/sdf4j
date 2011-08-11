@@ -11,6 +11,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 
 public class AndroidCanvas implements ICanvas {
@@ -44,11 +46,71 @@ public class AndroidCanvas implements ICanvas {
 
 	@Override
 	public Stroke getStroke() {
-		return null;
+		int cap;
+		switch (paint.getStrokeCap()) {
+		case BUTT:
+			cap = Stroke.CAP_BUTT;
+			break;
+		case ROUND:
+			cap = Stroke.CAP_ROUND;
+			break;
+		case SQUARE:
+			cap = Stroke.CAP_SQUARE;
+			break;
+		default:
+			throw new RuntimeException("Unrecognized cap value " + paint.getStrokeCap());
+		}
+		int join;
+		switch (paint.getStrokeJoin()) {
+		case BEVEL:
+			join = Stroke.JOIN_BEVEL;
+			break;
+		case MITER:
+			join = Stroke.JOIN_MITER;
+			break;
+		case ROUND:
+			join = Stroke.JOIN_ROUND;
+			break;
+		default:
+			throw new RuntimeException("Unrecognized join value " + paint.getStrokeJoin());
+		}
+		return new Stroke(paint.getStrokeWidth(), cap, join, paint.getStrokeMiter());
 	}
 
 	@Override
 	public void setStroke(Stroke s) {
+		Cap cap;
+		switch (s.getEndCap()) {
+		case Stroke.CAP_BUTT:
+			cap = Cap.BUTT;
+			break;
+		case Stroke.CAP_ROUND:
+			cap = Cap.ROUND;
+			break;
+		case Stroke.CAP_SQUARE:
+			cap = Cap.SQUARE;
+			break;
+		default:
+			throw new IllegalArgumentException("Unrecognized cap value");
+		}
+		Join join;
+		switch (s.getLineJoin()) {
+		case Stroke.JOIN_BEVEL:
+			join = Join.BEVEL;
+			break;
+		case Stroke.JOIN_MITER:
+			join = Join.MITER;
+			break;
+		case Stroke.JOIN_ROUND:
+			join = Join.MITER;
+			break;
+		default:
+			throw new IllegalArgumentException("Unrecognized join value");
+		}
+		paint.setStrokeCap(cap);
+		paint.setStrokeJoin(join);
+		paint.setStrokeMiter(s.getMiterLimit());
+		paint.setStrokeWidth(s.getLineWidth());
 	}
 
 	@Override
