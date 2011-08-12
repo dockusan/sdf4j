@@ -42,7 +42,7 @@ public class Color {
 	}
 
 	public Color(int rgb) {
-		value = 0xff000000 | rgb;
+		value = 0xFF000000 | rgb;
 	}
 
 	public int getRed() {
@@ -58,7 +58,7 @@ public class Color {
 	}
 
 	public int getAlpha() {
-		return (getRGB() >> 24) & 0xff;
+		return (getRGB() >> 24) & 0xFF;
 	}
 
 	public int getRGB() {

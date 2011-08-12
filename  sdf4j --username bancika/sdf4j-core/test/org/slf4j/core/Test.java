@@ -41,6 +41,8 @@ public class Test {
 		canvas.setColor(Color.black);
 		canvas.drawRoundRect(80, 10, 30, 30, 10, 10);
 		canvas.restoreTransform();
+		canvas.setColor(new Color(0, 255, 0, 123));
+		canvas.fillOval(50, 50, 60, 60);
 		byte[] b = new byte[64000];
 		int size = 0;
 		try {
