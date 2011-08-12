@@ -2,6 +2,7 @@ package org.sdf4j.awt;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
@@ -115,7 +116,7 @@ public class AWTCanvas implements ICanvas {
 
 	@Override
 	public void drawImage(Image img, int x, int y) {
-		ImageIcon icon = new ImageIcon(img.getData());
+		ImageIcon icon = new ImageIcon(img.getData(), img.getName());
 		g2d.drawImage(icon.getImage(), x, y, null);
 	}
 

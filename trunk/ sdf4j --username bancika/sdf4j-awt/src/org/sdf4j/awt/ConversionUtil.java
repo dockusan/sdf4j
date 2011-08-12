@@ -5,11 +5,11 @@ import java.awt.BasicStroke;
 public final class ConversionUtil {
 
 	public static java.awt.Color convertColor(org.sdf4j.core.Color c) {
-		return new java.awt.Color(c.getRGB());
+		return new java.awt.Color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
 	}
 
 	public static org.sdf4j.core.Color convertColor(java.awt.Color c) {
-		return new org.sdf4j.core.Color(c.getRGB());
+		return new org.sdf4j.core.Color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
 	}
 
 	public static java.awt.Stroke convertStroke(org.sdf4j.core.Stroke s) {
