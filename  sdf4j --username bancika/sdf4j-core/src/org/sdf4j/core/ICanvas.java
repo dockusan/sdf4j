@@ -6,6 +6,7 @@ package org.sdf4j.core;
  * 
  * @author Branislav Stojkovic
  */
-public interface ICanvas extends IPaintingAttributeManager, IGeometryRenderer, IImageRenderer, ITransformable {
+public interface ICanvas extends IPaintingAttributeManager, IGeometryRenderer, IImageRenderer,
+		ITransformable, IShapeManager, ITextManager {
 
 }

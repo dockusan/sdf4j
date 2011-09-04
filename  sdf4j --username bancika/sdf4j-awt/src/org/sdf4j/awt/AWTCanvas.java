@@ -2,15 +2,19 @@ package org.sdf4j.awt;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
 
 import org.sdf4j.core.Color;
 import org.sdf4j.core.Font;
+import org.sdf4j.core.FontMetrics;
 import org.sdf4j.core.ICanvas;
 import org.sdf4j.core.Image;
+import org.sdf4j.core.Point;
 import org.sdf4j.core.Stroke;
+import org.sdf4j.core.shapes.CompositeShape;
+import org.sdf4j.core.shapes.Rectangle;
 
 /**
  * {@link ICanvas} implementation for AWT {@link Graphics2D}. Wraps around the
@@ -151,5 +155,31 @@ public class AWTCanvas implements ICanvas {
 	@Override
 	public void translate(double dx, double dy) {
 		g2d.translate(dx, dy);
+	}
+
+	@Override
+	public boolean containsPoint(CompositeShape shape, Point point) {
+		return ConversionUtil.convertShape(shape).contains(ConversionUtil.convertPoint(point));
+	}
+
+	@Override
+	public boolean intersectsRect(CompositeShape shape, org.sdf4j.core.shapes.Rectangle rect) {
+		java.awt.Shape awtShape = ConversionUtil.convertShape(shape);
+		java.awt.Shape awtRect = ConversionUtil.convertShape(rect);
+		return awtShape.intersects((Rectangle2D) awtRect);
+	}
+
+	@Override
+	public FontMetrics getFontMetrics() {
+		java.awt.FontMetrics awtFontMetrics = g2d.getFontMetrics();
+		FontMetrics fontMetrics = new FontMetrics(awtFontMetrics.getAscent(), awtFontMetrics
+				.getDescent(), awtFontMetrics.getLeading());
+		return fontMetrics;
+	}
+
+	@Override
+	public Rectangle getTextBounds(String text) {
+		return (Rectangle) ConversionUtil.convertShape(g2d.getFontMetrics().getStringBounds(text,
+				g2d));
 	}
 }
