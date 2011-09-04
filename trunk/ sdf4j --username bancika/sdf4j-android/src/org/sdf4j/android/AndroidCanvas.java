@@ -2,9 +2,13 @@ package org.sdf4j.android;
 
 import org.sdf4j.core.Color;
 import org.sdf4j.core.Font;
+import org.sdf4j.core.FontMetrics;
 import org.sdf4j.core.ICanvas;
 import org.sdf4j.core.Image;
+import org.sdf4j.core.Point;
 import org.sdf4j.core.Stroke;
+import org.sdf4j.core.shapes.CompositeShape;
+import org.sdf4j.core.shapes.Rectangle;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -233,5 +237,29 @@ public class AndroidCanvas implements ICanvas {
 	@Override
 	public void translate(double dx, double dy) {
 		canvas.translate((float) dx, (float) dy);
+	}
+
+	@Override
+	public boolean containsPoint(CompositeShape shape, Point point) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean intersectsRect(CompositeShape shape, Rectangle rect) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public FontMetrics getFontMetrics() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Rectangle getTextBounds(String text) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
