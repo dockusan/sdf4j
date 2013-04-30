@@ -14,6 +14,7 @@ import org.sdf4j.core.Image;
 import org.sdf4j.core.Point;
 import org.sdf4j.core.Stroke;
 import org.sdf4j.core.shapes.CompositeShape;
+import org.sdf4j.core.shapes.IShape;
 import org.sdf4j.core.shapes.Rectangle;
 
 /**
@@ -158,12 +159,12 @@ public class AWTCanvas implements ICanvas {
 	}
 
 	@Override
-	public boolean containsPoint(CompositeShape shape, Point point) {
+	public boolean containsPoint(IShape shape, Point point) {
 		return ConversionUtil.convertShape(shape).contains(ConversionUtil.convertPoint(point));
 	}
 
 	@Override
-	public boolean intersectsRect(CompositeShape shape, org.sdf4j.core.shapes.Rectangle rect) {
+	public boolean intersectsRect(IShape shape, org.sdf4j.core.shapes.Rectangle rect) {
 		java.awt.Shape awtShape = ConversionUtil.convertShape(shape);
 		java.awt.Shape awtRect = ConversionUtil.convertShape(rect);
 		return awtShape.intersects((Rectangle2D) awtRect);
