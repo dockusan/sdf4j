@@ -1,11 +1,11 @@
 package org.sdf4j.core;
 
-import org.sdf4j.core.shapes.CompositeShape;
+import org.sdf4j.core.shapes.IShape;
 import org.sdf4j.core.shapes.Rectangle;
 
 public interface IShapeManager {
 
-	boolean intersectsRect(CompositeShape shape, Rectangle rect);
+	boolean intersectsRect(IShape shape, Rectangle rect);
 	
-	boolean containsPoint(CompositeShape shape, Point point);
+	boolean containsPoint(IShape shape, Point point);
 }
