@@ -240,13 +240,13 @@ public class AndroidCanvas implements ICanvas {
 	}
 
 	@Override
-	public boolean containsPoint(CompositeShape shape, Point point) {
+	public boolean containsPoint(IShape shape, Point point) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean intersectsRect(CompositeShape shape, Rectangle rect) {
+	public boolean intersectsRect(IShape shape, Rectangle rect) {
 		// TODO Auto-generated method stub
 		return false;
 	}
