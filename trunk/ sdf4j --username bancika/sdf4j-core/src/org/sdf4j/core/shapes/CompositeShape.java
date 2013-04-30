@@ -1,10 +1,9 @@
 package org.sdf4j.core.shapes;
 
-import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class CompositeShape implements Serializable {
+public class CompositeShape implements IShape {
 
 	private static final long serialVersionUID = 1L;
 	
