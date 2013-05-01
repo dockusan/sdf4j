@@ -1,5 +1,7 @@
 package org.sdf4j.android;
 
+import java.awt.geom.CubicCurve2D;
+
 import org.sdf4j.core.Color;
 import org.sdf4j.core.Font;
 import org.sdf4j.core.FontMetrics;
@@ -54,7 +56,8 @@ public class AndroidCanvas implements ICanvas {
 
 	@Override
 	public Font getFont() {
-		return new Font(fontName, paint.getTypeface().getStyle(), (int) paint.getTextSize());
+		return new Font(fontName, paint.getTypeface().getStyle(), (int) paint
+				.getTextSize());
 	}
 
 	@Override
@@ -77,7 +80,8 @@ public class AndroidCanvas implements ICanvas {
 			cap = Stroke.CAP_SQUARE;
 			break;
 		default:
-			throw new RuntimeException("Unrecognized cap value " + paint.getStrokeCap());
+			throw new RuntimeException("Unrecognized cap value "
+					+ paint.getStrokeCap());
 		}
 		int join;
 		switch (paint.getStrokeJoin()) {
@@ -91,13 +95,15 @@ public class AndroidCanvas implements ICanvas {
 			join = Stroke.JOIN_ROUND;
 			break;
 		default:
-			throw new RuntimeException("Unrecognized join value " + paint.getStrokeJoin());
+			throw new RuntimeException("Unrecognized join value "
+					+ paint.getStrokeJoin());
 		}
 		if (strokeIntervals != null) {
-			return new Stroke(paint.getStrokeWidth(), cap, join, paint.getStrokeMiter(),
-					strokeIntervals, strokePhase);
+			return new Stroke(paint.getStrokeWidth(), cap, join, paint
+					.getStrokeMiter(), strokeIntervals, strokePhase);
 		} else {
-			return new Stroke(paint.getStrokeWidth(), cap, join, paint.getStrokeMiter());
+			return new Stroke(paint.getStrokeWidth(), cap, join, paint
+					.getStrokeMiter());
 		}
 	}
 
@@ -135,11 +141,12 @@ public class AndroidCanvas implements ICanvas {
 		paint.setStrokeJoin(join);
 		paint.setStrokeMiter(s.getMiterLimit());
 		paint.setStrokeWidth(s.getLineWidth());
-		paint.setPathEffect(new DashPathEffect(s.getDashArray(), s.getDashPhase()));
+		paint.setPathEffect(new DashPathEffect(s.getDashArray(), s
+				.getDashPhase()));
 		this.strokeIntervals = s.getDashArray();
 		this.strokePhase = s.getDashPhase();
 	}
-	
+
 	@Override
 	public void setAntiAlias(boolean antiAlias) {
 		paint.setAntiAlias(antiAlias);
@@ -163,15 +170,19 @@ public class AndroidCanvas implements ICanvas {
 	}
 
 	@Override
-	public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+	public void drawRoundRect(int x, int y, int width, int height,
+			int arcWidth, int arcHeight) {
 		paint.setStyle(Style.STROKE);
-		canvas.drawRoundRect(new RectF(x, y, x + width, y + height), arcWidth, arcHeight, paint);
+		canvas.drawRoundRect(new RectF(x, y, x + width, y + height), arcWidth,
+				arcHeight, paint);
 	}
 
 	@Override
-	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+	public void fillRoundRect(int x, int y, int width, int height,
+			int arcWidth, int arcHeight) {
 		paint.setStyle(Style.FILL);
-		canvas.drawRoundRect(new RectF(x, y, x + width, y + height), arcWidth, arcHeight, paint);
+		canvas.drawRoundRect(new RectF(x, y, x + width, y + height), arcWidth,
+				arcHeight, paint);
 	}
 
 	@Override
@@ -187,15 +198,19 @@ public class AndroidCanvas implements ICanvas {
 	}
 
 	@Override
-	public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+	public void drawArc(int x, int y, int width, int height, int startAngle,
+			int arcAngle) {
 		paint.setStyle(Style.STROKE);
-		canvas.drawArc(new RectF(x, y, x + width, y + height), startAngle, arcAngle, false, paint);
+		canvas.drawArc(new RectF(x, y, x + width, y + height), startAngle,
+				arcAngle, false, paint);
 	}
 
 	@Override
-	public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+	public void fillArc(int x, int y, int width, int height, int startAngle,
+			int arcAngle) {
 		paint.setStyle(Style.FILL);
-		canvas.drawArc(new RectF(x, y, x + width, y + height), startAngle, arcAngle, false, paint);
+		canvas.drawArc(new RectF(x, y, x + width, y + height), startAngle,
+				arcAngle, false, paint);
 	}
 
 	@Override
@@ -205,7 +220,8 @@ public class AndroidCanvas implements ICanvas {
 
 	@Override
 	public void drawImage(Image image, int x, int y) {
-		Bitmap bitmap = BitmapFactory.decodeByteArray(image.getData(), 0, image.getData().length);
+		Bitmap bitmap = BitmapFactory.decodeByteArray(image.getData(), 0, image
+				.getData().length);
 		canvas.drawBitmap(bitmap, x, y, paint);
 	}
 
@@ -261,5 +277,14 @@ public class AndroidCanvas implements ICanvas {
 	public Rectangle getTextBounds(String text) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void drawCurve(int x1, int y1, int ctrlx1, int ctrly1, int ctrlx2,
+			int ctrly2, int x2, int y2) {
+		Path path = new Path();
+		path.moveTo(x1, y1);
+		path.cubicTo(ctrlx1, ctrly1, ctrlx2, ctrly2, x2, y2);
+		g2d.draw(path);
 	}
 }
