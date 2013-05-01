@@ -2,6 +2,7 @@ package org.sdf4j.awt;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
@@ -66,7 +67,8 @@ public class AWTCanvas implements ICanvas {
 	@Override
 	public void setAntiAlias(boolean antiAlias) {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				antiAlias ? RenderingHints.VALUE_ANTIALIAS_ON : RenderingHints.VALUE_ANTIALIAS_OFF);
+				antiAlias ? RenderingHints.VALUE_ANTIALIAS_ON
+						: RenderingHints.VALUE_ANTIALIAS_OFF);
 	}
 
 	@Override
@@ -85,12 +87,14 @@ public class AWTCanvas implements ICanvas {
 	}
 
 	@Override
-	public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+	public void drawRoundRect(int x, int y, int width, int height,
+			int arcWidth, int arcHeight) {
 		g2d.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
 
 	@Override
-	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+	public void fillRoundRect(int x, int y, int width, int height,
+			int arcWidth, int arcHeight) {
 		g2d.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
 
@@ -105,12 +109,14 @@ public class AWTCanvas implements ICanvas {
 	}
 
 	@Override
-	public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+	public void drawArc(int x, int y, int width, int height, int startAngle,
+			int arcAngle) {
 		g2d.drawArc(x, y, width, height, startAngle, arcAngle);
 	}
 
 	@Override
-	public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+	public void fillArc(int x, int y, int width, int height, int startAngle,
+			int arcAngle) {
 		g2d.fillArc(x, y, width, height, startAngle, arcAngle);
 	}
 
@@ -160,11 +166,13 @@ public class AWTCanvas implements ICanvas {
 
 	@Override
 	public boolean containsPoint(IShape shape, Point point) {
-		return ConversionUtil.convertShape(shape).contains(ConversionUtil.convertPoint(point));
+		return ConversionUtil.convertShape(shape).contains(
+				ConversionUtil.convertPoint(point));
 	}
 
 	@Override
-	public boolean intersectsRect(IShape shape, org.sdf4j.core.shapes.Rectangle rect) {
+	public boolean intersectsRect(IShape shape,
+			org.sdf4j.core.shapes.Rectangle rect) {
 		java.awt.Shape awtShape = ConversionUtil.convertShape(shape);
 		java.awt.Shape awtRect = ConversionUtil.convertShape(rect);
 		return awtShape.intersects((Rectangle2D) awtRect);
@@ -173,14 +181,22 @@ public class AWTCanvas implements ICanvas {
 	@Override
 	public FontMetrics getFontMetrics() {
 		java.awt.FontMetrics awtFontMetrics = g2d.getFontMetrics();
-		FontMetrics fontMetrics = new FontMetrics(awtFontMetrics.getAscent(), awtFontMetrics
-				.getDescent(), awtFontMetrics.getLeading());
+		FontMetrics fontMetrics = new FontMetrics(awtFontMetrics.getAscent(),
+				awtFontMetrics.getDescent(), awtFontMetrics.getLeading());
 		return fontMetrics;
 	}
 
 	@Override
 	public Rectangle getTextBounds(String text) {
-		return (Rectangle) ConversionUtil.convertShape(g2d.getFontMetrics().getStringBounds(text,
-				g2d));
+		return (Rectangle) ConversionUtil.convertShape(g2d.getFontMetrics()
+				.getStringBounds(text, g2d));
+	}
+
+	@Override
+	public void drawCurve(int x1, int y1, int ctrlx1, int ctrly1, int ctrlx2,
+			int ctrly2, int x2, int y2) {
+		CubicCurve2D curve = new CubicCurve2D.Double(x1, y1, ctrlx1, ctrly1,
+				ctrlx2, ctrly2, x2, y2);
+		g2d.draw(curve);
 	}
 }
