@@ -81,7 +81,8 @@ public interface IGeometryRenderer {
 	 *            the vertical diameter of the arc at the four corners.
 	 * @see #fillRoundRect
 	 */
-	void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight);
+	void drawRoundRect(int x, int y, int width, int height, int arcWidth,
+			int arcHeight);
 
 	/**
 	 * Fills the specified rounded corner rectangle with the current color. The
@@ -104,7 +105,8 @@ public interface IGeometryRenderer {
 	 *            the vertical diameter of the arc at the four corners.
 	 * @see #drawRoundRect
 	 */
-	void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight);
+	void fillRoundRect(int x, int y, int width, int height, int arcWidth,
+			int arcHeight);
 
 	/**
 	 * Draws the outline of an oval. The result is a circle or ellipse that fits
@@ -185,7 +187,8 @@ public interface IGeometryRenderer {
 	 *            the angular extent of the arc, relative to the start angle.
 	 * @see #fillArc
 	 */
-	void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle);
+	void drawArc(int x, int y, int width, int height, int startAngle,
+			int arcAngle);
 
 	/**
 	 * Fills a circular or elliptical arc covering the specified rectangle.
@@ -226,7 +229,8 @@ public interface IGeometryRenderer {
 	 *            the angular extent of the arc, relative to the start angle.
 	 * @see #drawArc
 	 */
-	void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle);
+	void fillArc(int x, int y, int width, int height, int startAngle,
+			int arcAngle);
 
 	/**
 	 * Draws the text given by the specified string, using this graphics
@@ -244,4 +248,20 @@ public interface IGeometryRenderer {
 	 *             if <code>str</code> is <code>null</code>.
 	 */
 	void drawString(String str, int x, int y);
+
+	/**
+	 * Draws a 2D cubic curve between (x1, y1) and (x2, y2) using two control
+	 * points.
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @param ctrlx1
+	 * @param ctrly1
+	 * @param ctrlx2
+	 * @param ctrly2
+	 * @param x2
+	 * @param y2
+	 */
+	void drawCurve(int x1, int y1, int ctrlx1, int ctrly1, int ctrlx2,
+			int ctrly2, int x2, int y2);
 }
